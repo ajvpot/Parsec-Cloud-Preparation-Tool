@@ -665,9 +665,10 @@ function disable-server-manager {
 
 #AWS Clean up Desktop Items
 function clean-aws {
-    Remove-item -path "$path\EC2 Feedback.Website"
+    Remove-Item -Path "$path\EC2 Feedback.Website"
     Remove-Item -Path "$path\EC2 Microsoft Windows Guide.website"
-    }
+    Remove-Item -Path "$path\Microsoft Edge.lnk"
+}
 <#
 #Move extracts Razer Surround Files into correct location
 Function ExtractRazerAudio {
