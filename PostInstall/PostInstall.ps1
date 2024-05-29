@@ -460,14 +460,6 @@ function disable-iesecurity {
 function download-resources {
     ProgressWriter -Status "Downloading DirectX June 2010 Redist" -PercentComplete $PercentComplete
     (New-Object System.Net.WebClient).DownloadFile("https://download.microsoft.com/download/8/4/A/84A35BF1-DAFE-4AE8-82AF-AD2AE20B6B14/directx_Jun2010_redist.exe", "C:\ParsecTemp\Apps\directx_Jun2010_redist.exe") 
-    ProgressWriter -Status "Downloading Parsec" -PercentComplete $PercentComplete
-    (New-Object System.Net.WebClient).DownloadFile("https://builds.parsecgaming.com/package/parsec-windows.exe", "C:\ParsecTemp\Apps\parsec-windows.exe")
-    ProgressWriter -Status "Downloading Parsec Virtual Display Driver" -percentcomplete $PercentComplete
-    (New-Object System.Net.WebClient).DownloadFile("https://builds.parsec.app/vdd/parsec-vdd-0.37.0.0.exe", "C:\ParsecTemp\Apps\parsec-vdd.exe")
-    ProgressWriter -Status "Downloading GPU Updater" -PercentComplete $PercentComplete
-    (New-Object System.Net.WebClient).DownloadFile("https://s3.amazonaws.com/parseccloud/image/parsec+desktop.png", "C:\ParsecTemp\parsec+desktop.png")
-    (New-Object System.Net.WebClient).DownloadFile("https://s3.amazonaws.com/parseccloud/image/white_ico_agc_icon.ico", "C:\ParsecTemp\white_ico_agc_icon.ico")
-    (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/parsec-cloud/Cloud-GPU-Updater/master/GPUUpdaterTool.ps1", "$env:ProgramData\ParsecLoader\GPUUpdaterTool.ps1")
     ProgressWriter -Status "Downloading Google Chrome" -PercentComplete $PercentComplete
     (New-Object System.Net.WebClient).DownloadFile("https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi", "C:\ParsecTemp\Apps\googlechromestandaloneenterprise64.msi")
     }
@@ -948,13 +940,10 @@ $ScripttaskList = @(
 "disable-server-manager";
 "Install-Gaming-Apps";
 "disable-devices";
-"InstallParsecVDD";
 "Server2019Controller";
-"gpu-update-shortcut";
 "clean-up";
 "clean-up-recent";
 "provider-specific";
-"TeamMachineSetupScheduledTask"
 )
 
 foreach ($func in $ScripttaskList) {
@@ -962,15 +951,8 @@ foreach ($func in $ScripttaskList) {
     & $func $PercentComplete
     }
 
-StartGPUUpdate -DontPromptPasswordUpdateGPU:$DontPromptPasswordUpdateGPU
-Start-ScheduledTask -TaskName "Setup Team Machine"
 ProgressWriter -status "Done" -percentcomplete 100
-Write-Host "1. Open Parsec and sign in (Team machines should have automatically signed in if userdata was correct)" -ForegroundColor black -BackgroundColor Green 
-Write-Host "2. Use GPU Updater to update your GPU Drivers!" -ForegroundColor black -BackgroundColor Green 
-#Write-Host "You don't need to sign into Razer Synapse, the login box will stop appearing after a couple of reboots" -ForegroundColor black -BackgroundColor Green 
 Write-Host "You may want to change your Windows password to something simpler if the password your cloud provider gave you is super long" -ForegroundColor black -BackgroundColor Green 
 Write-host "DONE!" -ForegroundColor black -BackgroundColor Green
-if ($DontPromptPasswordUpdateGPU) {} 
-Else {pause}
 
 
