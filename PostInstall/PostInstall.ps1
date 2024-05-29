@@ -943,7 +943,6 @@ $ScripttaskList = @(
 "enhance-pointer-precision";
 "enable-mousekeys";
 "set-time";
-"set-wallpaper";
 "Create-AutoShutdown-Shortcut";
 "Create-One-Hour-Warning-Shortcut";
 "disable-server-manager";
