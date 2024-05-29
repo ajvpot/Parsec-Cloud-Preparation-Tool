@@ -665,7 +665,7 @@ function disable-server-manager {
 
 #AWS Clean up Desktop Items
 function clean-aws {
-    remove-item -path "$path\EC2 Feedback.Website"
+    Remove-item -path "$path\EC2 Feedback.Website"
     Remove-Item -Path "$path\EC2 Microsoft Windows Guide.website"
     }
 <#
@@ -944,6 +944,7 @@ $ScripttaskList = @(
 "clean-up";
 "clean-up-recent";
 "provider-specific";
+"clean-aws";
 )
 
 foreach ($func in $ScripttaskList) {
